@@ -1,0 +1,11 @@
+{
+  "name": "expo-youtube-dl",
+  "module": "src/ExpoYoutubeDlModule.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

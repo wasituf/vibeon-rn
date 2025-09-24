@@ -32,6 +32,7 @@
     "expo-status-bar": "~3.0.8",
     "expo-system-ui": "~6.0.7",
     "expo-youtube-dl": "file:./modules/expo-youtube-dl",
+    "innertube": "file:./modules/innertube",
     "jotai": "^2.14.0",
     "lucide-react-native": "^0.511.0",
     "nativewind": "^4.2.1",

@@ -2,9 +2,9 @@ import "@/global.css"
 import { ThemeProvider } from "@react-navigation/native"
 import { PortalHost } from "@rn-primitives/portal"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { requireNativeModule } from "expo-modules-core"
 import { Stack } from "expo-router"
 import { StatusBar } from "expo-status-bar"
+import YTDL from "expo-youtube-dl"
 import { useAtomValue, useSetAtom } from "jotai"
 import { useColorScheme } from "nativewind"
 import { useEffect } from "react"
@@ -33,8 +33,6 @@ TrackPlayer.registerPlaybackService(() =>
 const AppSetup = () => {
   const { colorScheme } = useColorScheme()
 
-  const ExpoYoutubeDl = requireNativeModule("ExpoYoutubeDl")
-
   const setPlayerLoading = useSetAtom(playerLoadingAtom)
   const currentTrackId = useAtomValue(currentTrackIdAtom)
   const playbackQueue = useAtomValue(playbackQueueAtom)
@@ -46,7 +44,7 @@ const AppSetup = () => {
     const initializeYoutubeDl = async () => {
       try {
         console.log("Initializing YoutubeDL...")
-        await ExpoYoutubeDl.initYoutubeDL()
+        await YTDL.initYoutubeDL()
         console.log("YoutubeDL is ready.")
       } catch (error: unknown) {
         const err = error as { code: string; message: string }

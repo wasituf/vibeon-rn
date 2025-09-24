@@ -1,19 +1,16 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+export type ExpoYoutubeDlModuleEvents = {}
 
-export type OnLoadEventPayload = {
-  url: string;
-};
-
-export type ExpoYoutubeDlModuleEvents = {
-  onChange: (params: ChangeEventPayload) => void;
-};
-
-export type ChangeEventPayload = {
-  value: string;
-};
-
-export type ExpoYoutubeDlViewProps = {
-  url: string;
-  onLoad: (event: { nativeEvent: OnLoadEventPayload }) => void;
-  style?: StyleProp<ViewStyle>;
-};
+export type VideoInfo = {
+  downloadUrl: string
+  duration: number
+  ext: string
+  filesize: number
+  id: string
+  resolution: string
+  title: string
+  uploadDate: string
+  uploaderId: string
+  uploader: string
+  viewCount: string
+  webpage: string
+}

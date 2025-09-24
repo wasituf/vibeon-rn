@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+
+group = 'expo.modules.youtubedl'
+version = '0.7.6'
+
+dependencies {
+  implementation("io.github.junkfood02.youtubedl-android:library:0.17.4")
+}
+
+def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
+apply from: expoModulesCorePlugin
+applyKotlinExpoModulesCorePlugin()
+useCoreDependencies()
+useExpoPublishing()
+
+// If you want to use the managed Android SDK versions from expo-modules-core, set this to true.
+// The Android SDK versions will be bumped from time to time in SDK releases and may introduce breaking changes in your module code.
+// Most of the time, you may like to manage the Android SDK versions yourself.
+def useManagedAndroidSdkVersions = true
+if (useManagedAndroidSdkVersions) {
+  useDefaultAndroidSdkVersions()
+} else {
+  buildscript {
+    // Simple helper that allows the root project to override versions declared by this library.
+    ext.safeExtGet = { prop, fallback ->
+      rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+    }
+  }
+  project.android {
+    compileSdkVersion safeExtGet("compileSdkVersion", 36)
+    defaultConfig {
+      minSdkVersion safeExtGet("minSdkVersion", 24)
+      targetSdkVersion safeExtGet("targetSdkVersion", 36)
+    }
+  }
+}
+
+android {
+  namespace "expo.modules.youtubedl"
+  defaultConfig {
+    versionCode 1
+    versionName "0.7.6"
+
+    ndk {
+      abiFilters.add("x86")
+      abiFilters.add("x86_64")
+      abiFilters.add("armeabi-v7a")
+      abiFilters.add("arm64-v8a")
+    }
+  }
+  lintOptions {
+    abortOnError false
+  }
+  splits.abi {
+    reset()
+    include("x86", "x86_64", "armeabi-v7a", "arm64-v8a")
+  }
+}

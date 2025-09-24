@@ -1,5 +1,4 @@
-import axios from "axios"
-import { requireNativeModule } from "expo-modules-core"
+import YTDL from "expo-youtube-dl"
 
 type ResolveResponse = {
   downloadUrl: string
@@ -12,7 +11,7 @@ type ResolveResponse = {
   uploadDate: string
   uploaderId: string
   uploader: string
-  viewCount: number
+  viewCount: string
   webpage: string
 }
 
@@ -23,7 +22,6 @@ export const resolveTrack = async ({
   videoId: string
   thumbnail: string
 }): Promise<ResolveResponse> => {
-  const YTDL = requireNativeModule("ExpoYoutubeDl")
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
 
   const data = await YTDL.getVideoInfo(videoUrl)

@@ -1,0 +1,11 @@
+{
+  "name": "innertube",
+  "module": "src/InnerTubeModule.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
